@@ -32,17 +32,23 @@ df = pd.DataFrame(packages, columns=["Package", "Description", "Resource Link"])
 st.title("📍 ArcGIS Python Packages Guide")
 st.write("This application provides a list of useful Python packages for ArcGIS programming, including descriptions and resource links.")
 
-# Display data in an interactive table
-st.dataframe(df, column_config={
-    "Package": "📦 Package Name",
-    "Description": "📖 Description",
-    "Resource Link": "🔗 Documentation"
-})
+# Sidebar for navigation
+sidebar = st.sidebar
+sidebar.title("Navigation")
+menu_option = sidebar.radio("Select a page", ["Home", "View ArcGIS Pro Professional 2025 Study Guide"])
 
-st.write("### Click on the links in the table to access official documentation!")
+# Display the selected page
+if menu_option == "Home":
+    st.write("### GIS Packages List")
+    # Display data in an interactive table
+    st.dataframe(df, column_config={
+        "Package": "📦 Package Name",
+        "Description": "📖 Description",
+        "Resource Link": "🔗 Documentation"
+    })
+    st.write("### Click on the links in the table to access official documentation!")
 
-# Create a new page for ArcGIS Pro Professional 2025 Study Guide
-if st.button('View ArcGIS Pro Professional 2025 Study Guide'):
+elif menu_option == "View ArcGIS Pro Professional 2025 Study Guide":
     st.markdown("""
     ## ArcGIS Pro Professional 2025 Study Guide
 
