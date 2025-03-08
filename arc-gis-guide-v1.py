@@ -46,7 +46,7 @@ if menu_option == "Home":
         "Description": "📖 Description",
         "Resource Link": "🔗 Documentation"
     })
-    st.write("### Click on the links in the table to access official documentation!")
+    st.write("### Copy the links in the table and paste them into a web browser to access official documentation!")
 
 elif menu_option == "View ArcGIS Pro Professional 2025 Study Guide":
     st.markdown("""
