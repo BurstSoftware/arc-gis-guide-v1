@@ -25,27 +25,8 @@ packages = [
     ("geocoder", "Geocoding and reverse geocoding.", "https://geocoder.readthedocs.io/"),
 ]
 
-# Create an HTML table to display the list of GIS packages with clickable links
-html_table = """
-<table style="width:100%; border-collapse: collapse; text-align: left;">
-    <tr style="background-color: #f2f2f2;">
-        <th style="padding: 8px; border: 1px solid #ddd;">📦 Package Name</th>
-        <th style="padding: 8px; border: 1px solid #ddd;">📖 Description</th>
-        <th style="padding: 8px; border: 1px solid #ddd;">🔗 Documentation</th>
-    </tr>
-"""
-
-# Add each package to the HTML table
-for package, description, link in packages:
-    html_table += f"""
-    <tr>
-        <td style="padding: 8px; border: 1px solid #ddd;">{package}</td>
-        <td style="padding: 8px; border: 1px solid #ddd;">{description}</td>
-        <td style="padding: 8px; border: 1px solid #ddd;"><a href="{link}" target="_blank">Click Here</a></td>
-    </tr>
-    """
-
-html_table += "</table>"
+# Convert to DataFrame
+df = pd.DataFrame(packages, columns=["Package", "Description", "Resource Link"])
 
 # Streamlit App
 st.title("📍 ArcGIS Python Packages Guide")
@@ -59,8 +40,12 @@ menu_option = sidebar.radio("Select a page", ["Home", "View ArcGIS Pro Professio
 # Display the selected page
 if menu_option == "Home":
     st.write("### GIS Packages List")
-    # Display HTML table with clickable links
-    st.markdown(html_table, unsafe_allow_html=True)
+    # Display data in an interactive table
+    st.dataframe(df, column_config={
+        "Package": "📦 Package Name",
+        "Description": "📖 Description",
+        "Resource Link": "🔗 Documentation"
+    })
     st.write("### Click on the links in the table to access official documentation!")
 
 elif menu_option == "View ArcGIS Pro Professional 2025 Study Guide":
